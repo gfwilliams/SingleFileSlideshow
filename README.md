@@ -17,3 +17,9 @@ Setup is as follows:
 
 Currently the photos just appear suddenly when they are loaded. If you implement a nice CSS transition between them, please contact me - I'd love to improve what is here!
 
+
+
+NOTES
+======
+
+If using an iPad to view the slideshow, tap the button to the left of the address bar, then 'Add to Home Screen'. Then when you tap the icon on your home screen, the slideshow will open in Fullscreen mode.

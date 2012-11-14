@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+ <head>
+  <META NAME="Author" CONTENT="Gordon Williams, gw@pur3.co.uk"/>
+  <title>Slideshow</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+  <style>
+        html { 
+	        background: url(slideshow.svg) no-repeat center center fixed; 
+	        -webkit-background-size: contain;
+	        -moz-background-size: contain;
+	        -o-background-size: contain;
+	        background-size: contain;
+                background-color: black;
+        }
+  </style>
+</head>
+<body>
+<script>
+ var updatePeriod = 10; // in seconds
+
+
+ var directories = [];
+ var files = [];
+ var tmpImage = new Image();
+ tmpImage.onload = function() { $("html").css("background-image","url("+this.src+")");  } ;
+
+ function callback(data) {
+   var doc = $(data);
+   var dir = doc.filter('title').text().substring(9)+"/"; // remove 'Index of ' text
+  console.log("Received "+dir);
+   var links = $("a", doc);
+   links.each(function() {
+     var href = $(this).attr("href");
+     if (href!="" && href.charAt(0)!='?' && href.charAt(0)!='/') {
+       if (href.charAt(href.length-1)=="/") {
+        console.log("Requesting "+dir+href);
+        $.get(dir+href, callback);
+       } else {        
+         var ext = href.substring(href.lastIndexOf('.')).toLowerCase();
+         if (ext==".jpg")
+           files.push(dir+href);
+       }
+    }
+   });
+  }
+
+ function chooseImage() {
+  if (files.length>0) 
+    tmpImage.src = files[Math.floor(Math.random() * files.length)];
+ }
+
+ $(function() {
+  $.get("./", callback);
+  setInterval(chooseImage, updatePeriod * 1000);
+ });
+</script>
+</body>
+</html>
+

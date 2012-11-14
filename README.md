@@ -7,7 +7,7 @@ Setup is as follows:
 
    * Copy and paste the code below into an HTML file on your server/nas box in the root of your Photos folder (slideshow.html).
 
-   * If you want a nice 'please wait' indicator, create one and put it in 'slideshow.svg'
+   * If you want a nice 'please wait' indicator, copy 'slideshow.svg' in (credit: http://openclipart.org/detail/36667/tango-image-loading-by-warszawianka)
 
    * If you are running offline, you may wish to download jQuery to your server and change the file accordingly
 
@@ -15,5 +15,5 @@ Setup is as follows:
 
    * Wait for a few seconds (it may take some time if you have a lot of pictures!), and then photos randomly selected from your entire library will be displayed every 10 seconds.
 
-   * Currently the photos just appear suddenly when they are loaded. If you implement a nice CSS transition between them, please contact me - I'd love to improve what is here!
+Currently the photos just appear suddenly when they are loaded. If you implement a nice CSS transition between them, please contact me - I'd love to improve what is here!
 

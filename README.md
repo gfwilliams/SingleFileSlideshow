@@ -5,9 +5,9 @@ A single-file slideshow that runs in a web browser and can be used on a Web Serv
 
 Setup is as follows:
 
-   * Copy and paste the code below into an HTML file on your server/nas box in the root of your Photos folder (slideshow.html).
+   * Save 'slideshow.html' into a file on your server/nas box in the root of your Photos folder.
 
-   * If you want a nice 'please wait' indicator, copy 'slideshow.svg' in (credit: http://openclipart.org/detail/36667/tango-image-loading-by-warszawianka)
+   * If you want a nice 'please wait' indicator, copy 'slideshow.svg' in too (credit: http://openclipart.org/detail/36667/tango-image-loading-by-warszawianka)
 
    * If you are running offline, you may wish to download jQuery to your server and change the file accordingly
 

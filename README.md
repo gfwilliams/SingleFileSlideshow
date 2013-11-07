@@ -7,8 +7,6 @@ Setup is as follows:
 
    * Save 'slideshow.html' into a file on your server/nas box in the root of your Photos folder.
 
-   * If you want a nice 'please wait' indicator, copy 'slideshow.svg' in too (credit: http://openclipart.org/detail/36667/tango-image-loading-by-warszawianka)
-
    * If you are running offline, you may wish to download jQuery to your server and change the file accordingly
 
    * Start a web browser on the device you want to use for the Slideshow, and enter the URL of the slideshow - on my NAS box this is: http://192.168.1.234/media/Pictures/slideshow.html

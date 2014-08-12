@@ -1,4 +1,3 @@
-
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
 <html>
  <head>
@@ -7,33 +6,49 @@
   <title>Slideshow</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
   <style>
+        * { padding:0px;margin:0px;border:0px; }
         html {
-
           background-image:url(data:image/gif;base64,R0lGODlhEAALAPQAAP///wAAANra2tDQ0Orq6gYGBgAAAC4uLoKCgmBgYLq6uiIiIkpKSoqKimRkZL6+viYmJgQEBE5OTubm5tjY2PT09Dg4ONzc3PLy8ra2tqCgoMrKyu7u7gAAAAAAAAAAACH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCwAAACwAAAAAEAALAAAFLSAgjmRpnqSgCuLKAq5AEIM4zDVw03ve27ifDgfkEYe04kDIDC5zrtYKRa2WQgAh+QQJCwAAACwAAAAAEAALAAAFJGBhGAVgnqhpHIeRvsDawqns0qeN5+y967tYLyicBYE7EYkYAgAh+QQJCwAAACwAAAAAEAALAAAFNiAgjothLOOIJAkiGgxjpGKiKMkbz7SN6zIawJcDwIK9W/HISxGBzdHTuBNOmcJVCyoUlk7CEAAh+QQJCwAAACwAAAAAEAALAAAFNSAgjqQIRRFUAo3jNGIkSdHqPI8Tz3V55zuaDacDyIQ+YrBH+hWPzJFzOQQaeavWi7oqnVIhACH5BAkLAAAALAAAAAAQAAsAAAUyICCOZGme1rJY5kRRk7hI0mJSVUXJtF3iOl7tltsBZsNfUegjAY3I5sgFY55KqdX1GgIAIfkECQsAAAAsAAAAABAACwAABTcgII5kaZ4kcV2EqLJipmnZhWGXaOOitm2aXQ4g7P2Ct2ER4AMul00kj5g0Al8tADY2y6C+4FIIACH5BAkLAAAALAAAAAAQAAsAAAUvICCOZGme5ERRk6iy7qpyHCVStA3gNa/7txxwlwv2isSacYUc+l4tADQGQ1mvpBAAIfkECQsAAAAsAAAAABAACwAABS8gII5kaZ7kRFGTqLLuqnIcJVK0DeA1r/u3HHCXC/aKxJpxhRz6Xi0ANAZDWa+kEAA7AAAAAAAAAAAA);
+          background-size:16px;
+        }
+        div {
+          -webkit-background-size: contain;
+          -moz-background-size: contain;
+          -o-background-size: contain;
+          background-size: contain;
+          width: 100%; height: 100%;
+          opacity: 0;
+        }
+        html,div {
           background-color:grey;
           background-repeat:no-repeat !important;
           background-position:center center !important;
-          background-size:16px;
         }
   </style>
 </head>
 <body>
+<div></div>
 <script>
- var updatePeriod = 5; // in seconds
-
+ var updatePeriod = 8; // time between slides in seconds
 
  var directories = [];
  var files = [];
  var tmpImage = new Image();
  tmpImage.onload = function() {
-   $("html")
-   .css("background-image","url("+this.src+")")
-   .css("-webkit-background-size", "contain")
-   .css("-moz-background-size", "contain")
-   .css("-o-background-size", "contain")
-   .css("background-size", "contain")
-	 ;
- } ;
+   var url = this.src;
+   $("div").css("background-image","url("+url+")");
+   // start fade after a timeout - gives browser time to sort out the image change
+   setTimeout(function() {
+     $("div").fadeTo( 1500, 1, function() {
+       $("div").fadeTo( 0, 0 );
+       $("html").css("background-image","url("+url+")")
+         .css("-webkit-background-size", "contain")
+         .css("-moz-background-size", "contain")
+         .css("-o-background-size", "contain")
+         .css("background-size", "contain");
+      } );
+   }, 250);
+ };
 
  function callback(data) {
    var doc = $(data);
@@ -49,12 +64,9 @@
          var ext = href.substring(href.lastIndexOf('.')).toLowerCase();
          if (ext==".jpg")
            files.push(dir+href);
-
        }
     }
    });
-   chooseImage();
-
   }
 
  function chooseImage() {
@@ -64,7 +76,7 @@
 
  $(function() {
   $.get("./", callback);
-  setInterval(chooseImage, updatePeriod * 1000);
+  setInterval(chooseImage, 5000);
  });
 </script>
 </body>

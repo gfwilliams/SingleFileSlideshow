@@ -29,7 +29,7 @@
 <body>
 <div></div>
 <script>
- var updatePeriod = 8; // time between slides in seconds
+ var updatePeriod = 8000; // time between slides in milliseconds
 
  var directories = [];
  var files = [];
@@ -40,14 +40,17 @@
    // start fade after a timeout - gives browser time to sort out the image change
    setTimeout(function() {
      $("div").fadeTo( 1500, 1, function() {
+       // finished fade... tidy up.
        $("div").fadeTo( 0, 0 );
        $("html").css("background-image","url("+url+")")
          .css("-webkit-background-size", "contain")
          .css("-moz-background-size", "contain")
          .css("-o-background-size", "contain")
          .css("background-size", "contain");
+       // start loading the next image after a delay
+       setTimeout(chooseImage, updatePeriod);
       } );
-   }, 250);
+   }, 500);
  };
 
  function callback(data) {
@@ -76,7 +79,7 @@
 
  $(function() {
   $.get("./", callback);
-  setInterval(chooseImage, 5000);
+  setTimeout(chooseImage, updatePeriod);
  });
 </script>
 </body>
